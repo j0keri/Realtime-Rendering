@@ -1,0 +1,5 @@
+﻿  Building Custom Rule D:/Kurssit/TIES471/Realtime-Rendering/glfw-3.4/tests/CMakeLists.txt
+  msaa.c
+  getopt.c
+  Generating Code...
+  msaa.vcxproj -> D:\Kurssit\TIES471\Realtime-Rendering\glfw-3.4\build\tests\Debug\msaa.exe
