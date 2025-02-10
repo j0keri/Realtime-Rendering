@@ -1,0 +1,54 @@
+Käytetty aika yhteensä: 14h
+
+
+10.1.2025 -- 2h
+  Mitä tehtiin:
+    - Tsemppirinki
+  Mitä opittiin / mitä tuntemuksia:
+    - N/A
+    
+    
+13.1.2025 -- 2h
+  Mitä tehtiin:
+    - Tsemppirinki
+  Mitä opittiin / mitä tuntemuksia:
+    - N/A
+    
+    
+26.1.2025 -- 1h
+  Mitä tehtiin:
+    - Materiaaliin tutustumista
+    - Kappale "Introduction"
+    - Kappale "Getting started -> OpenGL"
+  Mitä opittiin / mitä tuntemuksia:
+    - Opittu vähän OpenGL:n toiminnasta ja speksistä
+    - Ei kyllä päästy vielä oikein yhtään alkuun
+    
+    
+8.2.2025 -- 4h
+  Mitä tehtiin:
+    - Tämän dokumentin formatointi mieleiseen muotoon
+    - Kappale "Getting Started -> Creating a window"
+    - Kappale "Getting Started -> Hello Window"
+  Mitä opittiin / mitä tuntemuksia:
+    - CMaken käyttöä ja kirjastojen kääntämistä
+    - Projektin luominen ja kirjastojen linkittäminen
+    - Pientä päänvaivaa aiheutui kun materiaali ei specifioinut GLFW:n buildaamista x64:lle
+    - Ikkunan luominen, näppäinten lukeminen ja ikkunan tyhjennys
+    - Ei kohtuuttomia tuskan tuntemuksia toistaiseksi
+    
+    
+9.2.2025 -- 5h
+  Mitä tehtiin:
+    - Kappale "Getting Started -> Hello Triangle" (ml. tehtävät)
+    - Toggle mallikolmioiden ja tehtäväratkaisun piirtämisen välillä vaihtamiseen
+    - Lisäksi toggle wireframe-piirtämiselle huvin vuoksi
+  Mitä opittiin / mitä tuntemuksia:
+    - Vähän grafiikkaliukuhihnasta
+    - Vähän varjostimista
+    - Edellämainitut kohtalaisen mielenkiintoisia, halua löytyy oppia lisää
+    - Kolmio saatiin piirtymään, jee
+    - Jonkinlaista käsitystä OpenGL:n käytöstä käytännössä
+    - Saisinko nyt itse tehtyä täysin tyhjästä tarvittavat toimenpiteet kolmion
+      piirtämiseen? En tosiaankaan, liikaa vaiheita muistettavana. Ehkä se ei tässä
+      kohtaa vielä ole tarkoituskaan
