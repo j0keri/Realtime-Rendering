@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 14h
+Käytetty aika yhteensä: 19h
 
 
 10.1.2025 -- 2h
@@ -52,3 +52,23 @@ Käytetty aika yhteensä: 14h
     - Saisinko nyt itse tehtyä täysin tyhjästä tarvittavat toimenpiteet kolmion
       piirtämiseen? En tosiaankaan, liikaa vaiheita muistettavana. Ehkä se ei tässä
       kohtaa vielä ole tarkoituskaan
+    
+    
+10.2.2025 -- 2h
+  Mitä tehtiin:
+    - Tsemppirinki
+  Mitä opittiin / mitä tuntemuksia:
+    - N/A
+    
+    
+15.2.2025 -- 3h
+  Mitä tehtiin:
+    - Kappale "Getting Started -> Shaders" (ei tehtäviä vielä)
+    - shader.h ja shader.cpp erikseen ohjeesta poiketen, koska teen mieluummin kunnolla :)
+    - Pieni sivuraide C++:n speksiin ja siihen miten edellä mainittu tehdään kunnolla
+  Mitä opittiin / mitä tuntemuksia:
+    - Vähän lisää GLSL:stä ja varjostimista yleisesti
+    - Vähän C++ luokista ja otsikkotietojen ja toteutuksen erottamisesta (.h/.cpp)
+    - Hyvin jännää hommaa itselleni, koska oma kokemus varjostimista käytännössä vain se
+      mitä Unityn Shader Graphilla on tullut tehtyä, niin nytpä pääsee näkemään minkälaista
+      toimintaa konepellin alla tapahtuu
