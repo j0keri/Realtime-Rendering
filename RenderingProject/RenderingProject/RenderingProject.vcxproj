@@ -139,8 +139,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\frag_basic.fs" />
+    <None Include="shaders\frag_uniform.fs" />
+    <None Include="shaders\frag_vertexColor.fs" />
     <None Include="Shaders\frag_yellow.fs" />
     <None Include="Shaders\vert_basic.vs" />
+    <None Include="shaders\vert_color.vs" />
+    <None Include="shaders\vert_colorFromPos.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

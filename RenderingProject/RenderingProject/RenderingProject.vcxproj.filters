@@ -48,5 +48,17 @@
     <None Include="Shaders\vert_basic.vs">
       <Filter>Source Files\Shaders</Filter>
     </None>
+    <None Include="shaders\frag_uniform.fs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\frag_vertexColor.fs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\vert_color.vs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\vert_colorFromPos.vs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

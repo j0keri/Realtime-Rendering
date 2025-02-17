@@ -12,24 +12,24 @@ using namespace std;
 
 // Vertices and indices for example triangles
 float vertices[] = {
-	 0.5f,  0.5f, 0.0f,  // Top right
-	 0.5f, -0.5f, 0.0f,  // Bottom right
-	-0.5f, -0.5f, 0.0f,  // Bottom left
-	-0.5f,  0.5f, 0.0f   // Top left 
+	 0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 0.0f,  // Top right
+	 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  // Bottom right
+	-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // Bottom left
+	-0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   // Top left 
 };
 unsigned int indices[] = {
-	0, 1, 3,   // First triangle
-	1, 2, 3    // Second triangle
+	0, 1, 3,  // First triangle
+	1, 2, 3   // Second triangle
 };
 
-// Vertices for exercise triangle 1
+// Vertices for "Hello Triangle" exercise triangle 1
 float verticesEx1[] = {
 	-0.5f,  0.0f, 0.0f,
 	 0.0f,  0.5f, 0.0f,
 	 0.0f, -0.5f, 0.0f
 };
 
-// Vertices for exercise triangle 2
+// Vertices for "Hello Triangle" exercise triangle 2
 float verticesEx2[] = {
 	 0.5f,  0.0f, 0.0f,
 	 0.0f, -0.5f, 0.0f,
@@ -42,11 +42,15 @@ float verticesEx2[] = {
 //------------------------
 
 // Vertex
-const char *vertBasicPath = "shaders/vert_basic.vs"; // Basic vertex shader, no processing on verts
+const char *vertBasicPath = "shaders/vert_basic.vs";  // Basic vertex shader, no processing on verts
+const char *vertColorPath = "shaders/vert_color.vs";  // Vertex shader that sends color data to fragment
+const char *vertColorFromPosPath = "shaders/vert_colorFromPos.vs";  // Vertex shader that sends color data to fragment, the data is the vertex position
 
 // Fragment
-const char *fragBasicPath = "shaders/frag_basic.fs"; // Basic fragment shader (orange)
-const char *fragYellowPath = "shaders/frag_yellow.fs"; // Yellow fragment shader
+const char *fragBasicPath = "shaders/frag_basic.fs";  // Basic fragment shader (orange)
+const char *fragYellowPath = "shaders/frag_yellow.fs";  // Yellow fragment shader
+const char *fragVertexColorPath = "shaders/frag_vertexColor.fs";  // Fragment shader with color set by vertex shader
+const char *fragUniformPath = "shaders/frag_uniform.fs";  // Fragment shader with color set via uniform
 
 
 //----------------
@@ -54,9 +58,21 @@ const char *fragYellowPath = "shaders/frag_yellow.fs"; // Yellow fragment shader
 //----------------
 
 int scene = 0;
+int sceneAmount = 4;
+
 bool drawWireframe = false;
+bool flipped = false;
+
+float offsetX = 0.0f;
+float offsetY = 0.0f;
+
 bool sceneKeyAlreadyPressed = false;
 bool wireframeKeyAlreadyPressed = false;
+bool flipKeyAlreadyPressed = false;
+bool upKeyAlreadyPressed = false;
+bool leftKeyAlreadyPressed = false;
+bool downKeyAlreadyPressed = false;
+bool rightKeyAlreadyPressed = false;
 
 
 // Viewport resizing when the window is resized
@@ -69,7 +85,9 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 // Keyboard handling
 // ESC - exit program
 // W - toggle wireframe mode
-// S - toggle between drawing the example triangles and the exercise triangles
+// S - toggle between scenes
+// F - vertically flip triangles that can be flipped
+// Arrows - adjust offset for triangles that use offset values
 void processInput(GLFWwindow *window)
 {
 	// ESC
@@ -95,13 +113,73 @@ void processInput(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
 		if (!sceneKeyAlreadyPressed) {
-			scene = (scene + 1) % 2;
+			scene = (scene + 1) % sceneAmount;
 			sceneKeyAlreadyPressed = true;
 		}
 	}
 	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_RELEASE)
 	{
 		sceneKeyAlreadyPressed = false;
+	}
+	// F
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+	{
+		if (!flipKeyAlreadyPressed) {
+			flipped = !flipped;
+			flipKeyAlreadyPressed = true;
+		}
+	}
+	else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE)
+	{
+		flipKeyAlreadyPressed = false;
+	}
+	// Up
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		if (!upKeyAlreadyPressed) {
+			offsetY += 0.2f;
+			upKeyAlreadyPressed = true;
+		}
+	}
+	else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE)
+	{
+		upKeyAlreadyPressed = false;
+	}
+	// Left
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	{
+		if (!leftKeyAlreadyPressed) {
+			offsetX -= 0.2f;
+			leftKeyAlreadyPressed = true;
+		}
+	}
+	else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE)
+	{
+		leftKeyAlreadyPressed = false;
+	}
+	// Down
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		if (!downKeyAlreadyPressed) {
+			offsetY -= 0.2f;
+			downKeyAlreadyPressed = true;
+		}
+	}
+	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_RELEASE)
+	{
+		downKeyAlreadyPressed = false;
+	}
+	// Right
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	{
+		if (!rightKeyAlreadyPressed) {
+			offsetX += 0.2f;
+			rightKeyAlreadyPressed = true;
+		}
+	}
+	else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_RELEASE)
+	{
+		rightKeyAlreadyPressed = false;
 	}
 }
 
@@ -139,6 +217,9 @@ int main()
 	// Shaders (using own Shader class to compile, link, and access programs to reduce the amount of copy paste)
 	Shader shaderBasic(vertBasicPath, fragBasicPath);
 	Shader shaderBasicYellow(vertBasicPath, fragYellowPath);
+	Shader shaderVertexColor(vertColorPath, fragVertexColorPath);
+	Shader shaderBasicUniformColor(vertBasicPath, fragUniformPath);
+	Shader shaderVertexColorFromPos(vertColorFromPosPath, fragVertexColorPath);
 
 	//--------------------
 
@@ -150,9 +231,11 @@ int main()
 	glGenBuffers(3, VBO);
 	glGenBuffers(1, &EBO);
 
-	//---------------------------------------
-	// VAO[0] (the one described in material)
-	//---------------------------------------
+	// TODO: Refactor the following to be more readable (VAO-class maybe?)
+
+	//-----------------------------------------------------------------------------
+	// VAO[0] (the one described in material) (modified to have color data as well)
+	//-----------------------------------------------------------------------------
 
 	// Bind vertex array object
 	glBindVertexArray(VAO[0]);
@@ -165,9 +248,13 @@ int main()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	// Setup vertex attribute pointers
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	// Setup vertex position attribute pointers
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
+	// Setup vertex color attribute pointers
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
 
 	// Unbind vertex array object
 	glBindVertexArray(0);
@@ -230,22 +317,66 @@ int main()
 
 		switch (scene)
 		{
+			// "Hello Triangle" example
 			case 0:
+				// Draw two orange triangles
 				shaderBasic.use();
+				shaderBasic.setBool("flip", flipped);
+				shaderBasic.setFloat("offsetX", offsetX);
+				shaderBasic.setFloat("offsetY", offsetY);
 				glBindVertexArray(VAO[0]);
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-				glBindVertexArray(0);
 				break;
+			// "Hello Triangle" exercises
 			case 1:
+				// Draw orange triangle
 				shaderBasic.use();
+				shaderBasic.setBool("flip", flipped);
+				shaderBasic.setFloat("offsetX", offsetX);
+				shaderBasic.setFloat("offsetY", offsetY);
 				glBindVertexArray(VAO[1]);
 				glDrawArrays(GL_TRIANGLES, 0, 3);
 
+				// Draw yellow triangle
 				shaderBasicYellow.use();
+				shaderBasicYellow.setBool("flip", flipped);
+				shaderBasicYellow.setFloat("offsetX", offsetX);
+				shaderBasicYellow.setFloat("offsetY", offsetY);
 				glBindVertexArray(VAO[2]);
 				glDrawArrays(GL_TRIANGLES, 0, 3);
+				break;
+			// "Shaders" example
+			case 2:
+				// Draw black to green fading triangle
+				shaderBasicUniformColor.use();
+				shaderBasicUniformColor.setBool("flip", flipped);
+				shaderBasicUniformColor.setFloat("offsetX", offsetX);
+				shaderBasicUniformColor.setFloat("offsetY", offsetY);
+				{
+					float time = glfwGetTime();
+					float green = (sin(time * 4) / 2.0f) + 0.5f;
+					shaderBasicUniformColor.setVec4f("ourColor", 0.0f, green, 0.0f, 1.0f);
+				}
+				glBindVertexArray(VAO[0]);
+				glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 
-				glBindVertexArray(0);
+				// Draw RGB triangle
+				shaderVertexColor.use();
+				shaderVertexColor.setBool("flip", flipped);
+				shaderVertexColor.setFloat("offsetX", offsetX);
+				shaderVertexColor.setFloat("offsetY", offsetY);
+				glBindVertexArray(VAO[0]);
+				glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (const void*)(3 * sizeof(GLuint)));
+				break;
+			// "Shaders" exercise 3 (1 and 2 also work for prior scenes)
+			case 3:
+				// Draw two triangles that get their color value from vertex position
+				shaderVertexColorFromPos.use();
+				shaderVertexColorFromPos.setBool("flip", flipped);
+				shaderVertexColorFromPos.setFloat("offsetX", offsetX);
+				shaderVertexColorFromPos.setFloat("offsetY", offsetY);
+				glBindVertexArray(VAO[0]);
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 				break;
 		}
 
