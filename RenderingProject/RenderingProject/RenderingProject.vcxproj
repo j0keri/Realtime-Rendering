@@ -131,6 +131,17 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="shader.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RenderingProject.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\frag_basic.fs" />
+    <None Include="Shaders\frag_yellow.fs" />
+    <None Include="Shaders\vert_basic.vs" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

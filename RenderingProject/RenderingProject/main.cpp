@@ -1,11 +1,16 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <shader.h>
 
 using namespace std;
 
 
-// Vertices and indices for triangles
+//------------
+// Vertex data
+//------------
+
+// Vertices and indices for example triangles
 float vertices[] = {
 	 0.5f,  0.5f, 0.0f,  // Top right
 	 0.5f, -0.5f, 0.0f,  // Bottom right
@@ -31,31 +36,23 @@ float verticesEx2[] = {
 	 0.0f,  0.5f, 0.0f
 };
 
-// Vertex shader
-const char *vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"void main()\n"
-"{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-"}\0";
 
-// Fragment shader
-const char *fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"void main()\n"
-"{\n"
-"	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-"}\0";
+//------------------------
+// Shader source filepaths
+//------------------------
 
-// Yellow fragment shader
-const char *yellowFragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"void main()\n"
-"{\n"
-"	FragColor = vec4(1.0f, 1.0f, 0.2f, 1.0f);\n"
-"}\0";
+// Vertex
+const char *vertBasicPath = "shaders/vert_basic.vs"; // Basic vertex shader, no processing on verts
 
+// Fragment
+const char *fragBasicPath = "shaders/frag_basic.fs"; // Basic fragment shader (orange)
+const char *fragYellowPath = "shaders/frag_yellow.fs"; // Yellow fragment shader
+
+
+//----------------
 // State variables
+//----------------
+
 int scene = 0;
 bool drawWireframe = false;
 bool sceneKeyAlreadyPressed = false;
@@ -139,85 +136,9 @@ int main()
 	// Setup callbacks
 	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
-	//-------------------------
-	// Shader program (default)
-	//-------------------------
-
-	// Create and compile vertex shader
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-
-	// Create and compile fragment shader
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-
-	// Check whether shader compilations succeeded or not, print errors if not
-	int success;
-	char infoLog[512];
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		cerr << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << endl;
-	}
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		cerr << "ERROR::SHADER::FRAGMENT_DEFAULT::COMPILATION_FAILED\n" << infoLog << endl;
-	}
-
-	// Create shader program, attach shaders, and link them
-	unsigned int shaderProgramDefault = glCreateProgram();
-	glAttachShader(shaderProgramDefault, vertexShader);
-	glAttachShader(shaderProgramDefault, fragmentShader);
-	glLinkProgram(shaderProgramDefault);
-
-	// Check whether linking the shader program succeeded or not, print errors if not
-	glGetProgramiv(shaderProgramDefault, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(shaderProgramDefault, 512, NULL, infoLog);
-		cerr << "ERROR::SHADER_PROGRAM_DEFAULT::LINKING_FAILED\n" << infoLog << endl;
-	}
-
-	// Delete the now redundant shader objects (only fragment, we're reusing vertex)
-	glDeleteShader(vertexShader);
-
-	//------------------------
-	// Shader program (yellow)
-	//------------------------
-
-	// Create and compile fragment shader
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &yellowFragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-
-	// Check whether shader compilation succeeded or not, print errors if not
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		cerr << "ERROR::SHADER::FRAGMENT_YELLOW::COMPILATION_FAILED\n" << infoLog << endl;
-	}
-
-	// Create shader program, attach shaders, and link them
-	unsigned int shaderProgramYellow = glCreateProgram();
-	glAttachShader(shaderProgramYellow, vertexShader);
-	glAttachShader(shaderProgramYellow, fragmentShader);
-	glLinkProgram(shaderProgramYellow);
-
-	// Check whether linking the shader program succeeded or not, print errors if not
-	glGetProgramiv(shaderProgramYellow, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(shaderProgramYellow, 512, NULL, infoLog);
-		cerr << "ERROR::SHADER_PROGRAM_YELLOW::LINKING_FAILED\n" << infoLog << endl;
-	}
-
-	// Delete the now redundant shader objects
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
+	// Shaders (using own Shader class to compile, link, and access programs to reduce the amount of copy paste)
+	Shader shaderBasic(vertBasicPath, fragBasicPath);
+	Shader shaderBasicYellow(vertBasicPath, fragYellowPath);
 
 	//--------------------
 
@@ -310,17 +231,17 @@ int main()
 		switch (scene)
 		{
 			case 0:
-				glUseProgram(shaderProgramDefault);
+				shaderBasic.use();
 				glBindVertexArray(VAO[0]);
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 				glBindVertexArray(0);
 				break;
 			case 1:
-				glUseProgram(shaderProgramDefault);
+				shaderBasic.use();
 				glBindVertexArray(VAO[1]);
 				glDrawArrays(GL_TRIANGLES, 0, 3);
 
-				glUseProgram(shaderProgramYellow);
+				shaderBasicYellow.use();
 				glBindVertexArray(VAO[2]);
 				glDrawArrays(GL_TRIANGLES, 0, 3);
 
