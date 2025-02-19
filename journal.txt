@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 24h
+Käytetty aika yhteensä: 29h
 
 
 10.1.2025 -- 2h
@@ -86,3 +86,14 @@ Käytetty aika yhteensä: 24h
     - Väärinymmärrys glDrawElementsin aloitusindeksin olemuksesta aiheutti mielipahaa, mutta
       siitäpähän oppii
     - em. kappale sisäistetty kunnolla tehtävien ja omien kokeilujen myötä
+    
+    
+19.2.2025 -- 5h
+  Mitä tehtiin:
+    - Kappale "Getting Started -> Textures" (ml. tehtävät)
+  Mitä opittiin / mitä tuntemuksia:
+    - Kohtalaisen kevyttä lukemista, kun asiat enimmäkseen tuttua pelimoottoreissa
+      tekstuureilla näpertämisen johdosta
+    - Aikaa kuluu kyllä kohtalaisen runsaasti omiin kokeiluihin, mutta ainakin tuntuu siltä
+      että syvällistä oppimista tapahtuu
+    - Tekstuurien kanssa pelaaminen onnistuu nyt
