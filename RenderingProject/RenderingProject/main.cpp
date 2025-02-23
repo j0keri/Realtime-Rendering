@@ -3,8 +3,12 @@
 #include <iostream>
 #include <shader.h>
 #include <stb_image.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace std;
+using namespace glm;
 
 
 //------------
@@ -64,7 +68,7 @@ const char *fragTexture2xMixPath = "shaders/frag_texture2xMix.fs";  // Fragment 
 //----------------
 
 int scene = 0;
-int sceneAmount = 6;
+int sceneAmount = 7;
 
 bool drawWireframe = false;
 bool flipped = false;
@@ -517,6 +521,10 @@ int main()
 				shaderTexture.setBool("flip", flipped);
 				shaderTexture.setFloat("offsetX", offsetX);
 				shaderTexture.setFloat("offsetY", offsetY);
+				{
+					mat4 transform(1.0f);
+					shaderTexture.setMat4f("transform", transform);
+				}
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, textureContainer);
 				glBindVertexArray(VAO[0]);
@@ -527,6 +535,10 @@ int main()
 				shaderTextureVertexColorMix.setBool("flip", flipped);
 				shaderTextureVertexColorMix.setFloat("offsetX", offsetX);
 				shaderTextureVertexColorMix.setFloat("offsetY", offsetY);
+				{
+					mat4 transform(1.0f);
+					shaderTexture.setMat4f("transform", transform);
+				}
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, textureContainer);
 				glBindVertexArray(VAO[0]);
@@ -540,6 +552,53 @@ int main()
 				shaderTexture2xMix.setFloat("offsetX", offsetX);
 				shaderTexture2xMix.setFloat("offsetY", offsetY);
 				shaderTexture2xMix.setFloat("mixWeight", textureMix);
+				{
+					mat4 transform(1.0f);
+					shaderTexture2xMix.setMat4f("transform", transform);
+				}
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, textureContainer);
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_2D, textureAwesomeface);
+				glBindVertexArray(VAO[0]);
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				break;
+			// "Transformations" example and exercises
+			case 6:
+				// Draw two triangles with the "container" texture and the "awesomeface" texture mixed
+				// Rotate them counter-clockwise over time, scale them by 0.5, and move them to the bottom right corner
+				shaderTexture2xMix.use();
+				shaderTexture2xMix.setBool("flip", flipped);
+				shaderTexture2xMix.setFloat("offsetX", offsetX);
+				shaderTexture2xMix.setFloat("offsetY", offsetY);
+				shaderTexture2xMix.setFloat("mixWeight", textureMix);
+				{
+					mat4 transform(1.0f);
+					transform = translate(transform, vec3(0.5f, -0.5f, 0.0f));
+					transform = rotate(transform, (float)glfwGetTime(), vec3(0.0f, 0.0f, 1.0f));
+					transform = scale(transform, vec3(0.5f, 0.5f, 0.5f));
+					shaderTexture2xMix.setMat4f("transform", transform);
+				}
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, textureContainer);
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_2D, textureAwesomeface);
+				glBindVertexArray(VAO[0]);
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+				// Draw two triangles with the "container" texture and the "awesomeface" texture mixed
+				// Scale them over time, and move them to the top left corner
+				shaderTexture2xMix.use();
+				shaderTexture2xMix.setBool("flip", flipped);
+				shaderTexture2xMix.setFloat("offsetX", offsetX);
+				shaderTexture2xMix.setFloat("offsetY", offsetY);
+				shaderTexture2xMix.setFloat("mixWeight", textureMix);
+				{
+					mat4 transform(1.0f);
+					transform = translate(transform, vec3(-0.5f, 0.5f, 0.0f));
+					transform = scale(transform, ((sin((float)glfwGetTime()) / 2) + 0.5f) * vec3(1.0f, 1.0f, 1.0f));
+					shaderTexture2xMix.setMat4f("transform", transform);
+				}
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, textureContainer);
 				glActiveTexture(GL_TEXTURE1);

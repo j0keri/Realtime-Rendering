@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 29h
+Käytetty aika yhteensä: 32h
 
 
 10.1.2025 -- 2h
@@ -97,3 +97,18 @@ Käytetty aika yhteensä: 29h
     - Aikaa kuluu kyllä kohtalaisen runsaasti omiin kokeiluihin, mutta ainakin tuntuu siltä
       että syvällistä oppimista tapahtuu
     - Tekstuurien kanssa pelaaminen onnistuu nyt
+    
+    
+22.2.2025 -- 3h
+  Mitä tehtiin:
+    - Kappale "Getting Started -> "Transformations" (ml. tehtävät)
+  Mitä opittiin / mitä tuntemuksia:
+    - Transformations-kappaleen alkuosa "In practice" otsikkoon asti tuttua kauraa, enkä
+      olisi siitä mitenkään kostunut jos olisin jättänyt kokonaan lukematta. Silmäilin
+      kuitenkin nopeahkosti läpi, enkä tuhlannut runsaasti aikaa lukemalla liaan tarkasti,
+      joka on liian usein tapana. Pieni voitto!
+    - Ärsyttävää kun GLM tekee matriisimuunnokset vastakkaisessa järjestyksessä kuin ne
+      koodissa listataan
+    - Eteneminen hidasta, kun aikaa meni tässäkin kohtalaisesti siihen, että tehdään
+      "hienommin" kuin mallissa... oppimista kylläkin tosin tapahtuu enemmän kuin suoraan
+      kopioimalla

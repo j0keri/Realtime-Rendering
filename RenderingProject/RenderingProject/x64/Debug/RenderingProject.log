@@ -1,4 +1,4 @@
 ﻿  main.cpp
-d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(75): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(488): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(79): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(492): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   RenderingProject.vcxproj -> D:\Kurssit\TIES471\Realtime-Rendering\RenderingProject\x64\Debug\RenderingProject.exe
