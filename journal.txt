@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 32h
+Käytetty aika yhteensä: 40h
 
 
 10.1.2025 -- 2h
@@ -101,7 +101,7 @@ Käytetty aika yhteensä: 32h
     
 22.2.2025 -- 3h
   Mitä tehtiin:
-    - Kappale "Getting Started -> "Transformations" (ml. tehtävät)
+    - Kappale "Getting Started -> Transformations" (ml. tehtävät)
   Mitä opittiin / mitä tuntemuksia:
     - Transformations-kappaleen alkuosa "In practice" otsikkoon asti tuttua kauraa, enkä
       olisi siitä mitenkään kostunut jos olisin jättänyt kokonaan lukematta. Silmäilin
@@ -112,3 +112,30 @@ Käytetty aika yhteensä: 32h
     - Eteneminen hidasta, kun aikaa meni tässäkin kohtalaisesti siihen, että tehdään
       "hienommin" kuin mallissa... oppimista kylläkin tosin tapahtuu enemmän kuin suoraan
       kopioimalla
+    
+    
+23.2.2025 -- 6h
+  Mitä tehtiin:
+    - Kappale "Getting Started -> Coordinate Systems" (ml. tehtävät)
+    - Projektiomatriisin kuvasuhde laskettu viewportin mittojen mukaan, eli em. kappaleen
+      scenet eivät vääristy ikkunan kokoa muutettaessa, toisin kuin esimerkin mukaan tehtynä
+    - Kappale "Getting Started -> Camera" (vain luettu, ei koodeja vielä)
+  Mitä opittiin / mitä tuntemuksia:
+    - Koordinaattisysteemeistä "view space" ja "clip space" täysin uusia käsitteitä
+    - Ei mitään maailmaa mullistavaa tai konseptina uutta kuitenkaan, vaikuttaisi, enemmän
+      vain sellaista mitä ei ole juurikaan tarvinnut varsinaisesti miettiä omissa käytännön
+      sovelluksissa tähän mennessä
+    - Coordinate Systems -kappale ei tuonut aivan hirveästi mitään uutta pöydälle itselleni,
+      ja se vähä uusi mitä se sisälsi oli helppo sisäistää. Kevyttä tekemistä!
+    - Camera-kappale myös enimmäkseen tuttua tavaraa esitietokurssilta ja Unityllä
+      räpeltämisestä
+    - Mielestäni erikoista, ettei deltatime ole toteutettu natiivisti GLFW:hen vaan
+      kehittäjän täytyy itse pitää kirjaa, kun kuitenkin aika universaalisti hyödyllinen
+      toiminnallisuus
+      
+      
+24.2.2025 -- 2h
+  Mitä tehtiin:
+    - Tsemppirinki
+  Mitä opittiin / mitä tuntemuksia:
+    - N/A

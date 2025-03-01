@@ -42,6 +42,66 @@ float verticesEx2[] = {
 	 0.0f,  0.5f, 0.0f
 };
 
+// Vertices for "Coordinate Systems" cube
+float verticesCube[] = {
+	// Positions          // Texture coords
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+};
+
+// Cube positions for "Coordinate Systems" example 3
+vec3 cubePositions[] = {
+	vec3(0.0f,  0.0f,  0.0f),
+	vec3(2.0f,  5.0f, -15.0f),
+	vec3(-1.5f, -2.2f, -2.5f),
+	vec3(-3.8f, -2.0f, -12.3f),
+	vec3(2.4f, -0.4f, -3.5f),
+	vec3(-1.7f,  3.0f, -7.5f),
+	vec3(1.3f, -2.0f, -2.5f),
+	vec3(1.5f,  2.0f, -2.5f),
+	vec3(1.5f,  0.2f, -1.5f),
+	vec3(-1.3f,  1.0f, -1.5f)
+};
+
 
 //------------------------
 // Shader source filepaths
@@ -52,6 +112,7 @@ const char *vertBasicPath = "shaders/vert_basic.vs";  // Basic vertex shader, no
 const char *vertColorPath = "shaders/vert_color.vs";  // Vertex shader that sends color data to fragment
 const char *vertColorFromPosPath = "shaders/vert_colorFromPos.vs";  // Vertex shader that sends color data to fragment, the data is the vertex position
 const char *vertTexturePath = "shaders/vert_texture.vs";  // Vertex shader that uses texture coordinates
+const char *vertTransformsPath = "shaders/vert_transforms.vs";  // Vertex shader that has support for transformation matrices
 
 // Fragment
 const char *fragBasicPath = "shaders/frag_basic.fs";  // Basic fragment shader (orange)
@@ -68,7 +129,7 @@ const char *fragTexture2xMixPath = "shaders/frag_texture2xMix.fs";  // Fragment 
 //----------------
 
 int scene = 0;
-int sceneAmount = 7;
+int sceneAmount = 10;
 
 bool drawWireframe = false;
 bool flipped = false;
@@ -243,7 +304,7 @@ int main()
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	// Create a window
-	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
 	if (window == NULL)
 	{
 		cerr << "Failed to create GLFW window" << endl;
@@ -340,6 +401,7 @@ int main()
 	Shader shaderTexture(vertTexturePath, fragTexturePath);
 	Shader shaderTextureVertexColorMix(vertTexturePath, fragTextureVertexColorMixPath);
 	Shader shaderTexture2xMix(vertTexturePath, fragTexture2xMixPath);
+	Shader shaderTransforms(vertTransformsPath, fragTexture2xMixPath);
 
 	// Set samplers
 	shaderTexture.use();
@@ -351,6 +413,10 @@ int main()
 	shaderTexture2xMix.use();
 	shaderTexture2xMix.setInt("tex0", 0);
 	shaderTexture2xMix.setInt("tex1", 1);
+
+	shaderTransforms.use();
+	shaderTransforms.setInt("tex0", 0);
+	shaderTransforms.setInt("tex1", 1);
 
 
 	//--------------------
@@ -431,7 +497,32 @@ int main()
 	// Unbind vertex array object
 	glBindVertexArray(0);
 
+	//--------------------------------------------
+	// cubeVAO (for the "Coordinate Systems" cube)
+	//--------------------------------------------
+
+	GLuint cubeVAO, cubeVBO;
+
+	glGenVertexArrays(1, &cubeVAO);
+	glBindVertexArray(cubeVAO);
+
+	glGenBuffers(1, &cubeVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesCube), verticesCube, GL_STATIC_DRAW);
+
+	// aPos
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	// aTexCoord
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
+
+
 	//--------------------
+
+	// Enable depth testing
+	glEnable(GL_DEPTH_TEST);
 
 	// Render loop
 	while (!glfwWindowShouldClose(window))
@@ -441,7 +532,7 @@ int main()
 
 		// Rendering commands
 		glClearColor(0.5f, 0.1f, 0.6f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		if (drawWireframe) {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -605,6 +696,95 @@ int main()
 				glBindTexture(GL_TEXTURE_2D, textureAwesomeface);
 				glBindVertexArray(VAO[0]);
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				break;
+			// "Coordinate Systems" example 1
+			case 7:
+				// Draw two triangles with the "container" texture and the "awesomeface" texture mixed
+				// Rotate them into 3D space with proper perspective
+				shaderTransforms.use();
+				shaderTransforms.setBool("flip", flipped);
+				shaderTransforms.setFloat("offsetX", offsetX);
+				shaderTransforms.setFloat("offsetY", offsetY);
+				shaderTransforms.setFloat("mixWeight", textureMix);
+				{
+					mat4 model(1.0f), view(1.0f), projection(1.0f);
+					model = rotate(model, radians(-55.0f), vec3(1.0f, 0.0f, 0.0f));
+					view = translate(view, vec3(0.0f, 0.0f, -3.0f));
+					int viewportW, viewportH;
+					glfwGetFramebufferSize(window, &viewportW, &viewportH);
+					projection = perspective(radians(45.0f), (float)viewportW / (float)viewportH, 0.1f, 100.0f);
+					shaderTransforms.setMat4f("model", model);
+					shaderTransforms.setMat4f("view", view);
+					shaderTransforms.setMat4f("projection", projection);
+				}
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, textureContainer);
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_2D, textureAwesomeface);
+				glBindVertexArray(VAO[0]);
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				break;
+			// "Coordinate Systems" example 2
+			case 8:
+				// Draw a rotating cube with the "container" texture and the "awesomeface" texture mixed
+				shaderTransforms.use();
+				shaderTransforms.setBool("flip", flipped);
+				shaderTransforms.setFloat("offsetX", offsetX);
+				shaderTransforms.setFloat("offsetY", offsetY);
+				shaderTransforms.setFloat("mixWeight", textureMix);
+				{
+					mat4 model(1.0f), view(1.0f), projection(1.0f);
+					model = rotate(model, (float)glfwGetTime() * radians(50.0f), vec3(0.5f, 1.0f, 0.0f));
+					view = translate(view, vec3(0.0f, 0.0f, -3.0f));
+					int viewportW, viewportH;
+					glfwGetFramebufferSize(window, &viewportW, &viewportH);
+					projection = perspective(radians(45.0f), (float)viewportW / (float)viewportH, 0.1f, 100.0f);
+					shaderTransforms.setMat4f("model", model);
+					shaderTransforms.setMat4f("view", view);
+					shaderTransforms.setMat4f("projection", projection);
+				}
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, textureContainer);
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_2D, textureAwesomeface);
+				glBindVertexArray(cubeVAO);
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+				break;
+			// "Coordinate Systems" example 3 and exercises
+			case 9:
+				// Draw 10 rotating cubes with the "container" texture and the "awesomeface" texture mixed
+				shaderTransforms.use();
+				shaderTransforms.setBool("flip", flipped);
+				shaderTransforms.setFloat("offsetX", offsetX);
+				shaderTransforms.setFloat("offsetY", offsetY);
+				shaderTransforms.setFloat("mixWeight", textureMix);
+				{
+					mat4 view(1.0f), projection(1.0f);
+					view = translate(view, vec3(0.0f, 0.0f, -3.0f));
+					int viewportW, viewportH;
+					glfwGetFramebufferSize(window, &viewportW, &viewportH);
+					projection = perspective(radians(45.0f), (float)viewportW / (float)viewportH, 0.1f, 100.0f);
+					shaderTransforms.setMat4f("view", view);
+					shaderTransforms.setMat4f("projection", projection);
+				}
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, textureContainer);
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_2D, textureAwesomeface);
+				glBindVertexArray(cubeVAO);
+				for (unsigned i = 0; i < 10; i++)
+				{
+					mat4 model(1.0f);
+					model = translate(model, cubePositions[i]);
+					float angle = 20.0f * i;
+					if (i % 3 == 0)
+					{
+						angle += (float)glfwGetTime() * 50.0f;
+					}
+					model = rotate(model, radians(angle), vec3(1.0f, 0.3f, 0.5f));
+					shaderTransforms.setMat4f("model", model);
+					glDrawArrays(GL_TRIANGLES, 0, 36);
+				}
 				break;
 		}
 
