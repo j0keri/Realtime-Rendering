@@ -1,11 +1,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include <shader.h>
 #include <stb_image.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "shader.h"
+#include "camera.h"
 
 using namespace std;
 using namespace glm;
@@ -90,15 +91,15 @@ float verticesCube[] = {
 
 // Cube positions for "Coordinate Systems" example 3
 vec3 cubePositions[] = {
-	vec3(0.0f,  0.0f,  0.0f),
-	vec3(2.0f,  5.0f, -15.0f),
+	vec3( 0.0f,  0.0f,  0.0f),
+	vec3( 2.0f,  5.0f, -15.0f),
 	vec3(-1.5f, -2.2f, -2.5f),
 	vec3(-3.8f, -2.0f, -12.3f),
-	vec3(2.4f, -0.4f, -3.5f),
+	vec3( 2.4f, -0.4f, -3.5f),
 	vec3(-1.7f,  3.0f, -7.5f),
-	vec3(1.3f, -2.0f, -2.5f),
-	vec3(1.5f,  2.0f, -2.5f),
-	vec3(1.5f,  0.2f, -1.5f),
+	vec3( 1.3f, -2.0f, -2.5f),
+	vec3( 1.5f,  2.0f, -2.5f),
+	vec3( 1.5f,  0.2f, -1.5f),
 	vec3(-1.3f,  1.0f, -1.5f)
 };
 
@@ -124,12 +125,19 @@ const char *fragTextureVertexColorMixPath = "shaders/frag_textureVertexColorMix.
 const char *fragTexture2xMixPath = "shaders/frag_texture2xMix.fs";  // Fragment shader that samples two textures and mixes them according to a weight given via uniform
 
 
+//--------
+// Objects
+//--------
+
+Camera camera;
+
+
 //----------------
 // State variables
 //----------------
 
 int scene = 0;
-int sceneAmount = 10;
+int sceneAmount = 11;
 
 bool drawWireframe = false;
 bool flipped = false;
@@ -138,6 +146,24 @@ float offsetX = 0.0f;
 float offsetY = 0.0f;
 
 float textureMix = 0.2;
+
+//vec3 cameraPos   = vec3(0.0f, 0.0f,  3.0f);
+//vec3 cameraFront = vec3(0.0f, 0.0f, -1.0f);
+//vec3 cameraUp    = vec3(0.0f, 1.0f,  0.0f);
+//
+//float cameraSpeed = 2.5f;
+//
+//float cameraYaw = -90.0f;
+//float cameraPitch = 0.0f;
+//float cameraFov = 45.0;
+
+bool firstMouse = true;
+//float mouseSensitivity = 0.05f;
+float lastMouseX = 400.0f;
+float lastMouseY = 300.0f;
+
+float deltaTime = 0.0f;
+float lastFrameTime = 0.0f;
 
 bool sceneKeyAlreadyPressed = false;
 bool wireframeKeyAlreadyPressed = false;
@@ -157,12 +183,37 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 }
 
 
+void mouseCallback(GLFWwindow* window, double xPos, double yPos)
+{
+	if (firstMouse)
+	{
+		lastMouseX = xPos;
+		lastMouseY = yPos;
+		firstMouse = false;
+	}
+
+	float xOffset = xPos - lastMouseX;
+	float yOffset = lastMouseY - yPos; // reversed since y-coordinates range from bottom to top
+
+	lastMouseX = xPos;
+	lastMouseY = yPos;
+
+	camera.ProcessMouseMovement(xOffset, yOffset, true);
+}
+
+
+void scrollCallback(GLFWwindow* window, double xOffset, double yOffset)
+{
+	camera.ProcessMouseScroll((float)yOffset / 10.0f);
+}
+
+
 // Keyboard handling
 // ESC - exit program
-// W - toggle wireframe mode
-// S - toggle between scenes
+// M - toggle rendering mode (solid / wireframe)
+// right/left arrow - previous/next scene
 // F - vertically flip triangles that can be flipped
-// Arrows - adjust offset for triangles that use offset values
+// WASD - move camera
 // Page up/down - adjust texture blending
 void processInput(GLFWwindow *window)
 {
@@ -172,28 +223,28 @@ void processInput(GLFWwindow *window)
 		glfwSetWindowShouldClose(window, true);
 	}
 
-	// W
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	// M
+	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
 	{
 		if (!wireframeKeyAlreadyPressed) {
 			drawWireframe = !drawWireframe;
 			wireframeKeyAlreadyPressed = true;
 		}
 	}
-	else if(glfwGetKey(window, GLFW_KEY_W) == GLFW_RELEASE)
+	else if(glfwGetKey(window, GLFW_KEY_M) == GLFW_RELEASE)
 	{
 		wireframeKeyAlreadyPressed = false;
 	}
 
-	// S
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	// right arrow
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 	{
 		if (!sceneKeyAlreadyPressed) {
 			scene = (scene + 1) % sceneAmount;
 			sceneKeyAlreadyPressed = true;
 		}
 	}
-	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_RELEASE)
+	else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_RELEASE)
 	{
 		sceneKeyAlreadyPressed = false;
 	}
@@ -209,53 +260,25 @@ void processInput(GLFWwindow *window)
 	{
 		flipKeyAlreadyPressed = false;
 	}
-	// Up
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	// W
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		if (!upKeyAlreadyPressed) {
-			offsetY += 0.2f;
-			upKeyAlreadyPressed = true;
-		}
+		camera.ProcessKeyboard(FORWARD, deltaTime);
 	}
-	else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE)
+	// A
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
-		upKeyAlreadyPressed = false;
+		camera.ProcessKeyboard(LEFT, deltaTime);
 	}
-	// Left
-	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	// S
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		if (!leftKeyAlreadyPressed) {
-			offsetX -= 0.2f;
-			leftKeyAlreadyPressed = true;
-		}
+		camera.ProcessKeyboard(BACKWARD, deltaTime);
 	}
-	else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE)
+	// D
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		leftKeyAlreadyPressed = false;
-	}
-	// Down
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-	{
-		if (!downKeyAlreadyPressed) {
-			offsetY -= 0.2f;
-			downKeyAlreadyPressed = true;
-		}
-	}
-	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_RELEASE)
-	{
-		downKeyAlreadyPressed = false;
-	}
-	// Right
-	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-	{
-		if (!rightKeyAlreadyPressed) {
-			offsetX += 0.2f;
-			rightKeyAlreadyPressed = true;
-		}
-	}
-	else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_RELEASE)
-	{
-		rightKeyAlreadyPressed = false;
+		camera.ProcessKeyboard(RIGHT, deltaTime);
 	}
 	// Page up
 	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
@@ -321,8 +344,17 @@ int main()
 		return -1;
 	}
 
+	// Capture cursor
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	// Initialize objects
+	camera = Camera();
+	camera.Position = vec3(0.0f, 0.0f, 3.0f);
+
 	// Setup callbacks
 	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+	glfwSetCursorPosCallback(window, mouseCallback);
+	glfwSetScrollCallback(window, scrollCallback);
 
 
 	//---------
@@ -527,7 +559,12 @@ int main()
 	// Render loop
 	while (!glfwWindowShouldClose(window))
 	{
-		// Input
+		// Calculate deltaTime
+		float currentFrameTime = glfwGetTime();
+		deltaTime = currentFrameTime - lastFrameTime;
+		lastFrameTime = currentFrameTime;
+
+		// Input handling
 		processInput(window);
 
 		// Rendering commands
@@ -786,6 +823,42 @@ int main()
 					glDrawArrays(GL_TRIANGLES, 0, 36);
 				}
 				break;
+			// "Camera" example and exercises
+			case 10:
+				// Draw 10 rotating cubes with the "container" texture and the "awesomeface" texture mixed
+				shaderTransforms.use();
+				shaderTransforms.setBool("flip", flipped);
+				shaderTransforms.setFloat("offsetX", offsetX);
+				shaderTransforms.setFloat("offsetY", offsetY);
+				shaderTransforms.setFloat("mixWeight", textureMix);
+				{
+					mat4 view, projection(1.0f);
+					view = camera.GetViewMatrix();
+					int viewportW, viewportH;
+					glfwGetFramebufferSize(window, &viewportW, &viewportH);
+					projection = perspective(camera.Zoom, (float)viewportW / (float)viewportH, 0.1f, 100.0f);
+					shaderTransforms.setMat4f("view", view);
+					shaderTransforms.setMat4f("projection", projection);
+				}
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, textureContainer);
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_2D, textureAwesomeface);
+				glBindVertexArray(cubeVAO);
+				for (unsigned i = 0; i < 10; i++)
+				{
+					mat4 model(1.0f);
+					model = translate(model, cubePositions[i]);
+					float angle = 20.0f * i;
+					if (i % 3 == 0)
+					{
+						angle += (float)glfwGetTime() * 50.0f;
+					}
+					model = rotate(model, radians(angle), vec3(1.0f, 0.3f, 0.5f));
+					shaderTransforms.setMat4f("model", model);
+					glDrawArrays(GL_TRIANGLES, 0, 36);
+				}
+				break;
 		}
 
 		// Check and call events and swap buffers
@@ -793,6 +866,7 @@ int main()
 		glfwSwapBuffers(window);
 	}
 
+	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;
 }
