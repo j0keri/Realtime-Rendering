@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 40h
+Käytetty aika yhteensä: 45h
 
 
 10.1.2025 -- 2h
@@ -132,10 +132,23 @@ Käytetty aika yhteensä: 40h
     - Mielestäni erikoista, ettei deltatime ole toteutettu natiivisti GLFW:hen vaan
       kehittäjän täytyy itse pitää kirjaa, kun kuitenkin aika universaalisti hyödyllinen
       toiminnallisuus
-      
-      
+    
+    
 24.2.2025 -- 2h
   Mitä tehtiin:
     - Tsemppirinki
   Mitä opittiin / mitä tuntemuksia:
     - N/A
+    
+    
+6.3.2025 -- 5h
+  Mitä tehtiin:
+    - Opiskelua ihan puhtaasti C++ puolelta refaktorointia varten, voinee kai laskea mukaan
+      vaikkei suoraan grafiikkaan liitykään
+    - Kappaleen "Getting Started -> Camera" koodit ja tehtävät
+  Mitä opittiin / mitä tuntemuksia:
+    - C++ konsepteja ja syntaksia, relevantteja asioita ja sitten (tässä vaiheessa ainakin)
+      vähemmänkin relevantteja
+    - Kai sitä jotain kameroistakin, enemmän aikaa meni esimerkkikoodien muotoiluun
+      mieleisiksi kuin varsinaiseen oppimiseen sillä aika vähän varsinaisesti uutta asiaa
+    - Getting Started -osio vihdoin valmis ja kurssi kohta ohi, kiirehän tässä tulee :)
