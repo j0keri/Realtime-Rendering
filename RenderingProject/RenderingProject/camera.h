@@ -52,10 +52,13 @@ public:
 	// Returns the view matrix calculated using Euler Angles and the LookAt Matrix
 	glm::mat4 getViewMatrix() const;
 
-	// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-	void processKeyboard(CameraMovement direction, float deltaTime);
+	// Update camera position. Should be called every frame
+	void updatePosition(float deltaTime);
 
-	// Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
+	// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
+	void processKeyboard(CameraMovement direction);
+
+	// Processes input received from a mouse input system. Expects the offset value in both the x and y direction
 	void processMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true);
 
 	// Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
@@ -63,6 +66,12 @@ public:
 
 
 private:
+	// Camera movement directions for the current frame
+	bool moveForward = false;
+	bool moveBack = false;
+	bool moveLeft = false;
+	bool moveRight = false;
+
 	// Calculates the front vector from the Camera's (updated) Euler Angles
 	void updateCameraVectors();
 };

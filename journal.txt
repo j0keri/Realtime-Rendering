@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 55h
+Käytetty aika yhteensä: 61h
 
 
 10.1.2025 -- 2h
@@ -177,9 +177,14 @@ Käytetty aika yhteensä: 55h
       nyt varsinaista asiaa taas kun aikaa vielä jonkin verran on
     
     
-9.3.2025 -- 2h
+9.3.2025 -- 6h
   Mitä tehtiin:
     - Uusi Scene Lighting-osiota varten
     - Kappale "Lighting -> Colors"
+    - Kappale "Lighting -> Basic Lighting" (ml. tehtävät)
+    - Kamera liikkumaan vakionopeudella, koska esimerkkikamera liikkuu nopeammin mentäessä
+      viistoon joka ärsytti vietävästi
   Mitä opittiin / mitä tuntemuksia:
     - Aika vähän mitään uutta tässä vaiheessa, tuttua asiaa entuudestaan
+    
+    

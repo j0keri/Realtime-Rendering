@@ -127,25 +127,25 @@ void processInput(GLFWwindow *window)
 	// W
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		camera.processKeyboard(FORWARD, deltaTime);
+		camera.processKeyboard(FORWARD);
 	}
 
 	// A
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
-		camera.processKeyboard(LEFT, deltaTime);
+		camera.processKeyboard(LEFT);
 	}
 
 	// S
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		camera.processKeyboard(BACKWARD, deltaTime);
+		camera.processKeyboard(BACKWARD);
 	}
 
 	// D
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		camera.processKeyboard(RIGHT, deltaTime);
+		camera.processKeyboard(RIGHT);
 	}
 
 	// M
@@ -265,6 +265,9 @@ int main()
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
+
+		// Update camera position
+		camera.updatePosition(deltaTime);
 
 		// Render the currently active scene
 		scenes[currentScene]->render();

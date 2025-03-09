@@ -38,24 +38,57 @@ mat4 Camera::getViewMatrix() const
 }
 
 
-void Camera::processKeyboard(CameraMovement direction, float deltaTime)
+void Camera::updatePosition(float deltaTime)
 {
+	vec2 movement(0.0f);
 	float velocity = movementSpeed * deltaTime;
+	
+	if (moveForward)
+	{
+		movement += vec2(1.0f, 0.0f);
+	}
+	if (moveBack)
+	{
+		movement -= vec2(1.0f, 0.0f);
+	}
+	if (moveLeft)
+	{
+		movement -= vec2(0.0f, 1.0f);
+	}
+	if (moveRight)
+	{
+		movement += vec2(0.0f, 1.0f);
+	}
+	
+	if (length(movement) != 0.0f)
+	{
+		movement = normalize(movement);
+	}
+	
+	position += front * movement.x * velocity;
+	position += right * movement.y * velocity;
+	
+	moveForward = moveBack = moveLeft = moveRight = false;
+}
+
+
+void Camera::processKeyboard(CameraMovement direction)
+{
 	if (direction == FORWARD)
 	{
-		position += front * velocity;
+		moveForward = true;
 	}
 	if (direction == BACKWARD)
 	{
-		position -= front * velocity;
+		moveBack = true;
 	}
 	if (direction == LEFT)
 	{
-		position -= right * velocity;
+		moveLeft = true;
 	}
 	if (direction == RIGHT)
 	{
-		position += right * velocity;
+		moveRight = true;
 	}
 }
 
