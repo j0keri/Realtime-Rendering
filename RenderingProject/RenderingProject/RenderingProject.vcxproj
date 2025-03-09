@@ -131,6 +131,7 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scenes\box_scene.cpp" />
+    <ClCompile Include="scenes\light_scene.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="scenes\box_scene.h" />
+    <ClInclude Include="scenes\light_scene.h" />
     <ClInclude Include="scenes\scene.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="texture.h" />
@@ -147,15 +149,12 @@
     <ResourceCompile Include="RenderingProject.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\frag_basic.fs" />
     <None Include="shaders\frag_boxScene.fs" />
-    <None Include="shaders\frag_uniform.fs" />
-    <None Include="shaders\frag_vertexColor.fs" />
-    <None Include="Shaders\frag_yellow.fs" />
-    <None Include="Shaders\vert_basic.vs" />
+    <None Include="shaders\frag_lightSceneLightSource.fs" />
+    <None Include="shaders\frag_lightSceneLitObject.fs" />
     <None Include="shaders\vert_boxScene.vs" />
-    <None Include="shaders\vert_color.vs" />
-    <None Include="shaders\vert_colorFromPos.vs" />
+    <None Include="shaders\vert_lightSceneLightSource.vs" />
+    <None Include="shaders\vert_lightSceneLitObject.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

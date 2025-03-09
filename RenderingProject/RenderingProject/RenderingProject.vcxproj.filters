@@ -42,6 +42,9 @@
     <ClCompile Include="texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scenes\light_scene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -62,6 +65,9 @@
     <ClInclude Include="texture.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="scenes\light_scene.h">
+      <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RenderingProject.rc">
@@ -69,31 +75,22 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\frag_basic.fs">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="Shaders\frag_yellow.fs">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="Shaders\vert_basic.vs">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="shaders\frag_uniform.fs">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="shaders\frag_vertexColor.fs">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="shaders\vert_color.vs">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="shaders\vert_colorFromPos.vs">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
     <None Include="shaders\frag_boxScene.fs">
       <Filter>Source Files\Shaders</Filter>
     </None>
     <None Include="shaders\vert_boxScene.vs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\frag_lightSceneLitObject.fs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\vert_lightSceneLitObject.vs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\frag_lightSceneLightSource.fs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\vert_lightSceneLightSource.vs">
       <Filter>Source Files\Shaders</Filter>
     </None>
   </ItemGroup>

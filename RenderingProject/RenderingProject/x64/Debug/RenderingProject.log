@@ -1,4 +1,10 @@
-﻿  camera.cpp
-  box_scene.cpp
-  Generating Code...
+﻿  main.cpp
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(59): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(64): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(65): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(68): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(103): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\main.cpp(250): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   RenderingProject.vcxproj -> D:\Kurssit\TIES471\Realtime-Rendering\RenderingProject\x64\Debug\RenderingProject.exe

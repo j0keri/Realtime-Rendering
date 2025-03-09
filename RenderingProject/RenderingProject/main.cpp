@@ -8,6 +8,7 @@
 #include "camera.h"
 #include "scenes/scene.h"
 #include "scenes/box_scene.h"
+#include "scenes/light_scene.h"
 
 using namespace std;
 using namespace glm;
@@ -228,6 +229,7 @@ int main()
 	// Initialize camera and scenes
 	camera = Camera(vec3(0.0f, 0.0f, 3.0f));
 	scenes.push_back(new BoxScene(window, &camera));
+	scenes.push_back(new LightScene(window, &camera));
 
 	// Setup callbacks
 	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
@@ -253,7 +255,7 @@ int main()
 		processInput(window);
 
 		// Rendering commands
-		glClearColor(0.5f, 0.1f, 0.6f, 1.0f);
+		glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		if (drawWireframe) {

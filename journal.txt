@@ -176,3 +176,10 @@ Käytetty aika yhteensä: 55h
     - Projektin codebase todella siisti omasta mielestä nyt, eipä muuta kuin speedrunaamaan
       nyt varsinaista asiaa taas kun aikaa vielä jonkin verran on
     
+    
+9.3.2025 -- 2h
+  Mitä tehtiin:
+    - Uusi Scene Lighting-osiota varten
+    - Kappale "Lighting -> Colors"
+  Mitä opittiin / mitä tuntemuksia:
+    - Aika vähän mitään uutta tässä vaiheessa, tuttua asiaa entuudestaan

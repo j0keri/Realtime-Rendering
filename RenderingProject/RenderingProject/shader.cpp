@@ -119,6 +119,13 @@ void Shader::setFloat(const string &name, float value) const
 }
 
 
+// Uniform setter for vec3 (with floats, probably all we'll need)
+void Shader::setVec3f(const string &name, vec3 value) const
+{
+	glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, value_ptr(value));
+}
+
+
 // Uniform setter for vec4 (with floats, probably all we'll need)
 void Shader::setVec4f(const string &name, vec4 value) const
 {
