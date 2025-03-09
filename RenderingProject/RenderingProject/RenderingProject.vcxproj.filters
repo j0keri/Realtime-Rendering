@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Shaders">
       <UniqueIdentifier>{ec7e8310-376c-4660-b93a-45929d15ff90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{df70f915-61e8-41ce-82c6-9d5d6e52e2b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -33,6 +36,12 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scenes\box_scene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -42,6 +51,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="shader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\box_scene.h">
+      <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\scene.h">
+      <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -70,6 +88,12 @@
       <Filter>Source Files\Shaders</Filter>
     </None>
     <None Include="shaders\vert_colorFromPos.vs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\frag_boxScene.fs">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="shaders\vert_boxScene.vs">
       <Filter>Source Files\Shaders</Filter>
     </None>
   </ItemGroup>

@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 45h
+Käytetty aika yhteensä: 55h
 
 
 10.1.2025 -- 2h
@@ -152,3 +152,27 @@ Käytetty aika yhteensä: 45h
     - Kai sitä jotain kameroistakin, enemmän aikaa meni esimerkkikoodien muotoiluun
       mieleisiksi kuin varsinaiseen oppimiseen sillä aika vähän varsinaisesti uutta asiaa
     - Getting Started -osio vihdoin valmis ja kurssi kohta ohi, kiirehän tässä tulee :)
+    
+    
+8.3.2025 -- 10h
+  Mitä tehtiin:
+    - Refaktoroitu koodi käyttämään Camera-luokkaa
+    - Muotoilu ja kirjoitusasut konsistentiksi kaikkialla
+    - Scene-luokka
+    - Texture-luokka
+    - Vanhat tekeleet hävitetty koska ei huvittanut tuhlata enempää aikaa refaktoroida niitä
+      käyttämään Scene-luokkaa (eli kaikki paitsi tuo missä on paljon bokseja)
+  Mitä opittiin / mitä tuntemuksia:
+    - Aika paljon header fileistä, C++ luokista, ja .h ja .cpp tiedostojen sielunelämästä
+      noin muutenkin
+    - Oleellisesti hyvin paljon opittiin että mikä EI toimi, ja riittävän hiusten päästä
+      repimisen jälkeen jopa miksi ei toimi, ja miten pitää tehdä että toimii
+    - Grafiikan suhteen uutta ei varsinaisesti opittu tässä, vaikkakin jo opitut asiat
+      lienee syöpyneet hyvin syvälle aivoihin koodin jatkuvan uudelleenmuotoilun ja sinne
+      tänne copypasteemisen johdosta
+    - Itsevarmuus yleisesti C++:n suhteen tosin nousee vauhdilla
+    - Sen verran tuskaa koettu tässä, että vihellän pelin poikki vanhojen "ei niin hienojen"
+      tekeleiden suhteen ja hävitän ne surutta enkä refaktoroi niitä
+    - Projektin codebase todella siisti omasta mielestä nyt, eipä muuta kuin speedrunaamaan
+      nyt varsinaista asiaa taas kun aikaa vielä jonkin verran on
+    
