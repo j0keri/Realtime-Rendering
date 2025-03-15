@@ -72,7 +72,7 @@ void BoxScene::render()
 	faceTexture.bind();
 	glBindVertexArray(boxVAO);
 
-	for (unsigned i = 0; i < 10; i++)
+	for (size_t i = 0; i < size(boxPositions); i++)
 	{
 		// Model matrix, different for each box to move them in world space
 		mat4 model(1.0f);
@@ -80,6 +80,7 @@ void BoxScene::render()
 		float angle = 20.0f * i;
 		if (i % 3 == 0)
 		{
+			// Make every 3rd box spin
 			angle += (float)glfwGetTime() * 50.0f;
 		}
 		model = rotate(model, radians(angle), vec3(1.0f, 0.3f, 0.5f));
@@ -91,12 +92,12 @@ void BoxScene::render()
 }
 
 
-void BoxScene::handleKey(int key)
+void BoxScene::handleKey(int key, float deltaTime)
 {
 	// Page up
 	if (key == GLFW_KEY_PAGE_UP)
 	{
-		textureMix += 0.2f;
+		textureMix += deltaTime;
 
 		if (textureMix > 1.0f)
 		{
@@ -107,7 +108,7 @@ void BoxScene::handleKey(int key)
 	// Page down
 	if (key == GLFW_KEY_PAGE_DOWN)
 	{
-		textureMix -= 0.2f;
+		textureMix -= deltaTime;
 
 		if (textureMix < 0.0f)
 		{

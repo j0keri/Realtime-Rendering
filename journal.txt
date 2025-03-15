@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 61h
+Käytetty aika yhteensä: 71h
 
 
 10.1.2025 -- 2h
@@ -188,3 +188,26 @@ Käytetty aika yhteensä: 61h
     - Aika vähän mitään uutta tässä vaiheessa, tuttua asiaa entuudestaan
     
     
+10.3.2025 -- 2h
+  Mitä tehtiin:
+    - Tsemppirinki
+  Mitä opittiin / mitä tuntemuksia:
+    - N/A
+    
+    
+13.3.2025 -- 8h
+  Mitä tehtiin:
+    - Kappale "Lighting -> Materials" (ml. tehtävät)
+    - Kappale "Lighting -> Lighting maps" (ml. tehtävät)
+    - Deltatime mukaan scenejen key-handlereihin että arvoja voidaan muuttaa jatkuvasti
+    - Laatikon emission map mukavamman näköiseksi :)
+    - Kappale "Lighting -> Light casters" (ml. tehtävät)
+    
+  Mitä opittiin / mitä tuntemuksia:
+    - Mielenterveys kärsi huomattavasti kun directional light ei mitenkään toiminut oikein
+      vaikka omasta mielestä olisi pitänyt (syy oli 1 w-komponentissa 0 sijasta, melkein
+      mahdoton virhe paikantaa yhdeltä yöllä)
+    - Muuten aika smooth sailing, aika pitkälti vain asiaa joka on tullut jo vastaan
+      aiemmassa elämässä muodossa tai toisessa
+    - Aika nopeastihan noita kappaleita saatiin edistettyä kun hammasta puremalla jätettiin
+      (enimmäkseen ainakin) turha säätäminen ja hiominen sivummalle :)

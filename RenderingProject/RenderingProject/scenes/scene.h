@@ -21,7 +21,7 @@ public:
 	virtual void render() = 0;
 
 	// Handle scene specific keyboard commands
-	virtual void handleKey(int key) = 0;
+	virtual void handleKey(int key, float deltaTime) = 0;
 };
 
 #endif

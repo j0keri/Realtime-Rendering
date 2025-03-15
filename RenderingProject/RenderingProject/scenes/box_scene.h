@@ -114,7 +114,7 @@ public:
 	void render() override;
 
 	// Handle scene specific keyboard commands
-	void handleKey(int key) override;
+	void handleKey(int key, float deltaTime) override;
 };
 
 #endif

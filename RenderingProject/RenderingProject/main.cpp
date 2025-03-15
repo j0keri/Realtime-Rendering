@@ -40,8 +40,6 @@ float lastFrameTime = 0.0f;
 bool nextSceneKeyAlreadyPressed = false;
 bool prevSceneKeyAlreadyPressed = false;
 bool wireframeKeyAlreadyPressed = false;
-bool pgUpKeyAlreadyPressed = false;
-bool pgDownKeyAlreadyPressed = false;
 
 
 // Viewport resizing when the window is resized
@@ -165,29 +163,13 @@ void processInput(GLFWwindow *window)
 	// Page up
 	if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_PRESS)
 	{
-		if (!pgUpKeyAlreadyPressed)
-		{
-			scenes[currentScene]->handleKey(GLFW_KEY_PAGE_UP);
-			pgUpKeyAlreadyPressed = true;
-		}
-	}
-	else if (glfwGetKey(window, GLFW_KEY_PAGE_UP) == GLFW_RELEASE)
-	{
-		pgUpKeyAlreadyPressed = false;
+		scenes[currentScene]->handleKey(GLFW_KEY_PAGE_UP, deltaTime);
 	}
 
 	// Page down
 	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_PRESS)
 	{
-		if (!pgDownKeyAlreadyPressed)
-		{
-			scenes[currentScene]->handleKey(GLFW_KEY_PAGE_DOWN);
-			pgDownKeyAlreadyPressed = true;
-		}
-	}
-	else if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN) == GLFW_RELEASE)
-	{
-		pgDownKeyAlreadyPressed = false;
+		scenes[currentScene]->handleKey(GLFW_KEY_PAGE_DOWN, deltaTime);
 	}
 }
 
