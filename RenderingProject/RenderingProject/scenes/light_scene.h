@@ -8,9 +8,9 @@
 class LightScene : public Scene
 {
 public:
-	//------------
-	// Vertex data
-	//------------
+	//-------------------------
+	// Vertex and position data
+	//-------------------------
 
 	float boxVertices[288] = {
 		// Positions          // Normals           // Texture coords
@@ -97,20 +97,53 @@ public:
 	GLuint boxVBO;
 
 
+	//-----------------
+	// Light properties
+	//-----------------
+
+	// Directional
+	glm::vec3 directionalLightDirection = glm::vec3(-0.2f, -1.0f, -0.3f);
+	glm::vec3 directionalLightColor = glm::vec3(0.5f);
+	glm::vec3 directionalLightSpecular = glm::vec3(1.0f);
+
+	// Point
+	glm::vec3 pointLightPositions[4] = {
+		glm::vec3(0.7f,  0.2f,  2.0f),
+		glm::vec3(2.3f, -3.3f, -4.0f),
+		glm::vec3(-4.0f,  2.0f, -12.0f),
+		glm::vec3(0.0f,  0.0f, -3.0f)
+	};
+	glm::vec3 pointLightColors[4] = {
+		glm::vec3(0.5f),
+		glm::vec3(0.5f),
+		glm::vec3(0.5f),
+		glm::vec3(0.5f)
+	};
+	glm::vec3 pointLightSpeculars[4] = {
+		glm::vec3(1.0f),
+		glm::vec3(1.0f),
+		glm::vec3(1.0f),
+		glm::vec3(1.0f)
+	};
+
+	// Spot
+	glm::vec3 spotLightColor = glm::vec3(1.0f);
+	glm::vec3 spotLightSpecular = glm::vec3(1.0f);
+	float spotLightInnerCutOff = 12.5f;
+	float spotLightOuterCutOff = 17.5f;
+
+
 	//------
 	// Other
 	//------
 
 	GLFWwindow *window;  // Window that's rendered into
 	Camera *camera;  // Current active camera
-
-	glm::vec3 coralColor = glm::vec3(1.0f, 0.5f, 0.31f);
-
-	glm::vec3 directionalLightDir = glm::vec3(-0.2f, -1.0f, -0.3f);
-	glm::vec3 lightPosDefault = glm::vec3(1.2f, 1.0f, 2.0f);
-	glm::vec3 lightColorDefault = glm::vec3(1.0f);
-
+	int lightingScheme = 0;
+	int amountSchemes = 5;
+	bool flashlight = true;
 	float emissionIntensity = 1.0f;
+	glm::vec3 skyColor = glm::vec3(0.05f, 0.05f, 0.1f);
 
 
 	//--------
@@ -125,6 +158,9 @@ public:
 
 	// Handle scene specific keyboard commands
 	void handleKey(int key, float deltaTime) override;
+
+	// Adjust light settings, called when lighting scheme is changed
+	void adjustLights();
 };
 
 #endif

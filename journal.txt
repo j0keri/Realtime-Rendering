@@ -195,7 +195,7 @@ Käytetty aika yhteensä: 71h
     - N/A
     
     
-13.3.2025 -- 8h
+14.3.2025 -- 8h
   Mitä tehtiin:
     - Kappale "Lighting -> Materials" (ml. tehtävät)
     - Kappale "Lighting -> Lighting maps" (ml. tehtävät)
@@ -211,3 +211,14 @@ Käytetty aika yhteensä: 71h
       aiemmassa elämässä muodossa tai toisessa
     - Aika nopeastihan noita kappaleita saatiin edistettyä kun hammasta puremalla jätettiin
       (enimmäkseen ainakin) turha säätäminen ja hiominen sivummalle :)
+    
+    
+15.3.2025 -- 5h
+  Mitä tehtiin:
+    - Kappale "Lighting -> Multiple lights" (ml. tehtävät)
+  Mitä opittiin / mitä tuntemuksia:
+    - Vähän tuli taas hiottua turhan hienoksi, mutta ainakaan en tässä kiireen keskellä
+      sortunut tekemään Light-luokkaa, jonka olioita voisi sitten suoraan heittää
+      Shader-oliolle joka osaa sitten asettaa nuo parametrit oikein ja render-silmukka
+      siistiintyy... pieni voitto taas ajankäytön optimoinnin suhteen
+    - Sitten vaan malleja lataamaan

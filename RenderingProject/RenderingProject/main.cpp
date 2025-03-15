@@ -39,7 +39,10 @@ float lastFrameTime = 0.0f;
 
 bool nextSceneKeyAlreadyPressed = false;
 bool prevSceneKeyAlreadyPressed = false;
+bool upKeyAlreadyPressed = false;
+bool downKeyAlreadyPressed = false;
 bool wireframeKeyAlreadyPressed = false;
+bool flashlightKeyAlreadyPressed = false;
 
 
 // Viewport resizing when the window is resized
@@ -79,8 +82,10 @@ void scrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 // Keyboard handling
 // ESC - exit program
 // Right/Left arrow - previous/next scene
+// Up/Down arrow - cycle variants of scene
 // WASD - move camera
 // M - toggle rendering mode (solid / wireframe)
+// F - toggle flashlight (in scenes that support it)
 // Page up/down - functionality varies per scene
 void processInput(GLFWwindow *window)
 {
@@ -122,6 +127,34 @@ void processInput(GLFWwindow *window)
 		nextSceneKeyAlreadyPressed = false;
 	}
 
+	// Up arrow
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		if (!upKeyAlreadyPressed)
+		{
+			scenes[currentScene]->handleKey(GLFW_KEY_UP, deltaTime);
+			upKeyAlreadyPressed = true;
+		}
+	}
+	else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE)
+	{
+		upKeyAlreadyPressed = false;
+	}
+
+	// Down arrow
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		if (!downKeyAlreadyPressed)
+		{
+			scenes[currentScene]->handleKey(GLFW_KEY_DOWN, deltaTime);
+			downKeyAlreadyPressed = true;
+		}
+	}
+	else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_RELEASE)
+	{
+		downKeyAlreadyPressed = false;
+	}
+
 	// W
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
@@ -158,6 +191,20 @@ void processInput(GLFWwindow *window)
 	else if (glfwGetKey(window, GLFW_KEY_M) == GLFW_RELEASE)
 	{
 		wireframeKeyAlreadyPressed = false;
+	}
+
+	// F
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+	{
+		if (!flashlightKeyAlreadyPressed)
+		{
+			scenes[currentScene]->handleKey(GLFW_KEY_F, deltaTime);
+			flashlightKeyAlreadyPressed = true;
+		}
+	}
+	else if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE)
+	{
+		flashlightKeyAlreadyPressed = false;
 	}
 
 	// Page up

@@ -8,9 +8,9 @@
 class BoxScene : public Scene
 {
 public:
-	//------------
-	// Vertex data
-	//------------
+	//-------------------------
+	// Vertex and position data
+	//-------------------------
 
 	float boxVertices[180] = {
 		// Positions          // Texture coords

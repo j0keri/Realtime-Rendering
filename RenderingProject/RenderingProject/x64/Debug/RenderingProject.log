@@ -1,17 +1,2 @@
 ﻿  light_scene.cpp
-d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\scenes\light_scene.cpp(93): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\scenes\light_scene.cpp(94): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\scenes\light_scene.cpp(95): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
   RenderingProject.vcxproj -> D:\Kurssit\TIES471\Realtime-Rendering\RenderingProject\x64\Debug\RenderingProject.exe
