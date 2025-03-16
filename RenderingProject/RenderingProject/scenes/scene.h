@@ -5,9 +5,10 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "../texture.h"
 #include "../shader.h"
 #include "../camera.h"
+#include "../texture_legacy.h"
+#include "../model.h"
 
 
 // Base class for scenes

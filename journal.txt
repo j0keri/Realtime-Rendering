@@ -1,4 +1,4 @@
-Käytetty aika yhteensä: 71h
+Käytetty aika yhteensä: 79h
 
 
 10.1.2025 -- 2h
@@ -213,12 +213,30 @@ Käytetty aika yhteensä: 71h
       (enimmäkseen ainakin) turha säätäminen ja hiominen sivummalle :)
     
     
-15.3.2025 -- 5h
+15.3.2025 -- 8h
   Mitä tehtiin:
     - Kappale "Lighting -> Multiple lights" (ml. tehtävät)
+    - Kappale "Model Loading -> Assimp"
+    - Kappale "Model Loading -> Mesh"
   Mitä opittiin / mitä tuntemuksia:
     - Vähän tuli taas hiottua turhan hienoksi, mutta ainakaan en tässä kiireen keskellä
       sortunut tekemään Light-luokkaa, jonka olioita voisi sitten suoraan heittää
       Shader-oliolle joka osaa sitten asettaa nuo parametrit oikein ja render-silmukka
       siistiintyy... pieni voitto taas ajankäytön optimoinnin suhteen
     - Sitten vaan malleja lataamaan
+    - Assimp melkein saatiin käännettyä ilman virheitä ensimmäisellä yrityksellä ja
+      mielipahalta melkein säästyttiin
+    
+    
+16.3.2025 -- 6h
+  Mitä tehtiin:
+    - Uusi Scene Model-osiota varten
+    - Kappale "Model Loading -> Model"
+  Mitä opittiin / mitä tuntemuksia:
+    - Sain melkein hermoromahduksen, kun jostain mystisestä syystä malli ei ottanut valoa
+      ollenkaan point lighteista ja specularit eivät näkyneet ollenkaan... ikuisuuksien
+      epätoivoisen debuggaamisen jälkeen selvisi vihdoin että tämä johtuu siitä että olin
+      epähuomiossa pyyhkinyt pois koodin joka asettaa normal matrixin shaderille, tämä
+      ei käynyt edes mielessä koska toiminta ei vaikuttanut siltä että kyseinen matriisi
+      puuttuisi kokonaan, sillä directional- ja spotlight valaisivat mallia oikein...
+    - Eipä ihan ehditty Advanced Lightingin loppuun :)

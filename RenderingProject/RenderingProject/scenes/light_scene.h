@@ -4,7 +4,7 @@
 #include "scene.h"
 
 
-// A scene with a light source and lit boxes
+// A scene with light sources and lit boxes
 class LightScene : public Scene
 {
 public:
@@ -75,9 +75,9 @@ public:
 	// Textures
 	//---------
 
-	Texture containerDiffuseMap;
-	Texture containerSpecularMap;
-	Texture containerEmissionMap;
+	TextureLegacy containerDiffuseMap;
+	TextureLegacy containerSpecularMap;
+	TextureLegacy containerEmissionMap;
 
 
 	//--------

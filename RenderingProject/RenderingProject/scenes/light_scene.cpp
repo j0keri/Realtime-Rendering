@@ -14,9 +14,9 @@ LightScene::LightScene(GLFWwindow *w, Camera *c)
 	// Generate textures
 	//------------------
 
-	containerDiffuseMap = Texture("textures/container2.png", GL_REPEAT, GL_RGBA, GL_RGBA);
-	containerSpecularMap = Texture("textures/container2_specular.png", GL_REPEAT, GL_RGBA, GL_RGBA);
-	containerEmissionMap = Texture("textures/matrix.jpg", GL_REPEAT, GL_RGB, GL_RGB);
+	containerDiffuseMap = TextureLegacy("textures/container2.png", GL_REPEAT);
+	containerSpecularMap = TextureLegacy("textures/container2_specular.png", GL_REPEAT);
+	containerEmissionMap = TextureLegacy("textures/matrix.jpg", GL_REPEAT);
 
 
 	//-----------------------------------------------
@@ -25,9 +25,9 @@ LightScene::LightScene(GLFWwindow *w, Camera *c)
 
 	boxShader = Shader("shaders/vert_lightSceneLitObject.vs", "shaders/frag_lightSceneLitObject.fs");
 	boxShader.use();
-	boxShader.setInt("material.diffuse", 0);
-	boxShader.setInt("material.specular", 1);
-	boxShader.setInt("material.emission", 2);
+	boxShader.setInt("material.texture_diffuse1", 0);
+	boxShader.setInt("material.texture_specular1", 1);
+	boxShader.setInt("material.texture_emission1", 2);
 
 	lightSourceShader = Shader("shaders/vert_lightSceneLightSource.vs", "shaders/frag_lightSceneLightSource.fs");
 

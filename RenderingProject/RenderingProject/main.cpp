@@ -9,6 +9,7 @@
 #include "scenes/scene.h"
 #include "scenes/box_scene.h"
 #include "scenes/light_scene.h"
+#include "scenes/backpack_scene.h"
 
 using namespace std;
 using namespace glm;
@@ -259,6 +260,7 @@ int main()
 	camera = Camera(vec3(0.0f, 0.0f, 3.0f));
 	scenes.push_back(new BoxScene(window, &camera));
 	scenes.push_back(new LightScene(window, &camera));
+	scenes.push_back(new BackpackScene(window, &camera));
 
 	// Setup callbacks
 	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);

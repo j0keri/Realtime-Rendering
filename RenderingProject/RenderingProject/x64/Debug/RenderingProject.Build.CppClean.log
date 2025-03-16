@@ -3,8 +3,16 @@ d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debu
 d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\glad.obj
 d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\stb_image.obj
 d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\shader.obj
-d:\kurssit\ties471\realtime-rendering\renderingproject\x64\debug\renderingproject.exe
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\main.obj
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\camera.obj
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\texture.obj
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\box_scene.obj
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\light_scene.obj
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\mesh.obj
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\backpack_scene.obj
+d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\model.obj
 d:\kurssit\ties471\realtime-rendering\renderingproject\x64\debug\renderingproject.ilk
+d:\kurssit\ties471\realtime-rendering\renderingproject\x64\debug\renderingproject.exe
 d:\kurssit\ties471\realtime-rendering\renderingproject\x64\debug\renderingproject.pdb
 d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\renderingproject.res
 d:\kurssit\ties471\realtime-rendering\renderingproject\renderingproject\x64\debug\renderingproject.tlog\cl.command.1.tlog

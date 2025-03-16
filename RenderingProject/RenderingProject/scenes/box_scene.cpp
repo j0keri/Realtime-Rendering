@@ -14,8 +14,8 @@ BoxScene::BoxScene(GLFWwindow *w, Camera *c)
 	// Generate textures
 	//------------------
 
-	containerTexture = Texture("textures/container.jpg", GL_REPEAT, GL_RGB, GL_RGB);
-	faceTexture = Texture("textures/awesomeface.png", GL_REPEAT, GL_RGBA, GL_RGBA);
+	containerTexture = TextureLegacy("textures/container.jpg", GL_REPEAT);
+	faceTexture = TextureLegacy("textures/awesomeface.png", GL_REPEAT);
 
 
 	//-----------------------------------------------

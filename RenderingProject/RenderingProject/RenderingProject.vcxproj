@@ -93,7 +93,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimpd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,20 +130,26 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="model.cpp" />
+    <ClCompile Include="scenes\backpack_scene.cpp" />
     <ClCompile Include="scenes\box_scene.cpp" />
     <ClCompile Include="scenes\light_scene.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="texture.cpp" />
+    <ClCompile Include="texture_legacy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="model.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="scenes\backpack_scene.h" />
     <ClInclude Include="scenes\box_scene.h" />
     <ClInclude Include="scenes\light_scene.h" />
     <ClInclude Include="scenes\scene.h" />
     <ClInclude Include="shader.h" />
-    <ClInclude Include="texture.h" />
+    <ClInclude Include="texture_legacy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RenderingProject.rc" />

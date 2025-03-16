@@ -75,8 +75,8 @@ public:
 	// Textures
 	//---------
 
-	Texture containerTexture;
-	Texture faceTexture;
+	TextureLegacy containerTexture;
+	TextureLegacy faceTexture;
 
 
 	//--------
